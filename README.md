@@ -18,7 +18,7 @@
 - **OpenAPI/Swagger** for API documentation.
 - **Spring Security** with JWT for authentication.
 - **JUnit** and **MockMVC** for testing.
-- **MySQL** as the relational database.
+- **MySQL 8+** as the relational database.
 
 ## Endpoints
 
@@ -33,8 +33,63 @@
     "currency": "USD",
     "transactionType": "CARD"
   }
-  - Response:
+  ```
+- Response:
+  ```json
     {
         "transactionId": "abc123",
         "status": "PENDING"
     }
+  ```
+### 2. **Get Transaction Status**
+   •	GET /transactions/{id}
+   •	Description: Retrieves the status of a specific transaction.
+
+### 3. **List Transactions**
+   •	GET /transactions
+   •	Query Params: userId, status, sortBy, order.
+   •	Description: Lists transactions with optional filters and sorting.
+
+## Getting Started
+
+### Prerequisites
+•	Java 17
+•	Maven 3.8+
+•	MySQL 8+ (or your preferred RDBMS)
+
+### Installation
+1.	Clone the repository:
+```shell
+    git clone https://github.com/your-username/payment-transaction-manager.git
+    cd payment-transaction-manager
+```
+2. Configure the database in application.yml:
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/transaction_db
+    username: your_username
+    password: your_password
+  jpa:
+    hibernate:
+      ddl-auto: validate
+```
+3. Run Application:
+```shell
+mvn spring-boot:run
+```
+4. Running Tests:
+```shell
+mvn test
+```
+
+## Architecture
+
+The project follows a Hexagonal Architecture, with clear separation of concerns:
+•	Controllers: Handle HTTP requests and responses.
+•	Domain Services: Contain business logic.
+•	Infrastructure: Manage database interactions and external API calls.
+
+## Author
+
+Cristian Gadea
