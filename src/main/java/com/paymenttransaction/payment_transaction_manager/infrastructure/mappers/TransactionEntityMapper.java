@@ -5,7 +5,7 @@ import com.paymenttransaction.payment_transaction_manager.infrastructure.entitie
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TransactionEntityMapper {
 
     TransactionEntityMapper INSTANCE = Mappers.getMapper(TransactionEntityMapper.class);

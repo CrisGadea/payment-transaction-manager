@@ -7,17 +7,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TransactionMapper {
 
     TransactionMapper INSTANCE = Mappers.getMapper(TransactionMapper.class);
 
-    // Mapear de DTO a Modelo
     @Mapping(target = "id", ignore = true) // Ignorar el ID al mapear
-    //@Mapping(target = "status") // Establecer un valor por defecto -> , constant = "PENDING"
+    @Mapping(target = "status", constant = "PENDING") // Establecer un valor por defecto -> , constant = "PENDING"
     @Mapping(target = "createdAt", ignore = true) // Ignorar el campo creado automáticamente
     Transaction toModel(TransactionRequestDTO dto);
 
-    // Mapear de Modelo a DTO de Respuesta
     TransactionResponseDTO toResponseDTO(Transaction model);
 }

@@ -2,14 +2,17 @@ package com.paymenttransaction.payment_transaction_manager.infrastructure.mapper
 
 import com.paymenttransaction.payment_transaction_manager.application.dtos.transaction.TransactionRequestDTO;
 import com.paymenttransaction.payment_transaction_manager.application.dtos.transaction.TransactionResponseDTO;
+import com.paymenttransaction.payment_transaction_manager.domain.enums.TransactionStatus;
 import com.paymenttransaction.payment_transaction_manager.domain.models.Transaction;
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-23T02:11:39-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.13 (Amazon.com Inc.)"
+    date = "2025-01-25T17:36:29-0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.14 (Amazon.com Inc.)"
 )
+@Component
 public class TransactionMapperImpl implements TransactionMapper {
 
     @Override
@@ -24,6 +27,8 @@ public class TransactionMapperImpl implements TransactionMapper {
         transaction.setAmount( dto.getAmount() );
         transaction.setCurrency( dto.getCurrency() );
         transaction.setTransactionType( dto.getTransactionType() );
+
+        transaction.setStatus( TransactionStatus.PENDING );
 
         return transaction;
     }

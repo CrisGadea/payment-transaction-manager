@@ -6,7 +6,9 @@ import com.paymenttransaction.payment_transaction_manager.domain.models.Transact
 import com.paymenttransaction.payment_transaction_manager.infrastructure.entities.TransactionEntity;
 import com.paymenttransaction.payment_transaction_manager.infrastructure.mappers.TransactionEntityMapper;
 import com.paymenttransaction.payment_transaction_manager.infrastructure.repositories.TransactionRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -14,17 +16,23 @@ import java.util.Optional;
 public class TransactionAdapter implements TransactionPort {
 
     private final TransactionRepository repository;
-    private final TransactionEntityMapper mapper = TransactionEntityMapper.INSTANCE;
+    private final TransactionEntityMapper mapper;
 
-    public TransactionAdapter(TransactionRepository repository) {
+    public TransactionAdapter(TransactionRepository repository, TransactionEntityMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
+    @Transactional
     public Transaction createTransaction(Transaction transaction) {
-        TransactionEntity entity = mapper.toEntity(transaction);
-        TransactionEntity savedEntity = repository.save(entity);
-        return mapper.toModel(savedEntity);
+        try {
+            TransactionEntity entity = mapper.toEntity(transaction);
+            TransactionEntity savedEntity = repository.save(entity);
+            return mapper.toModel(savedEntity);
+        } catch (DataIntegrityViolationException ex) {
+            throw new RuntimeException("Save transaction Fail. Verify the data entered.", ex);
+        }
     }
 
     @Override

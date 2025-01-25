@@ -1,4 +1,4 @@
-package com.paymenttransaction.payment_transaction_manager.config;
+package com.paymenttransaction.payment_transaction_manager.config.jwt;
 
 import com.paymenttransaction.payment_transaction_manager.domain.services.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;

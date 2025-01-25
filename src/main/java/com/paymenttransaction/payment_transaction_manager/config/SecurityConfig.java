@@ -1,5 +1,6 @@
 package com.paymenttransaction.payment_transaction_manager.config;
 
+import com.paymenttransaction.payment_transaction_manager.config.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,12 +21,17 @@ public class SecurityConfig {
         this.jwtAuthFilter = jwtAuthFilter;
     }
 
-    @Bean
+    @Bean(name = "defaultSecurityFilterChain")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Deshabilitar CSRF para pruebas con Postman
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll() // Permitir acceso sin autenticación a /auth/**
+                        .requestMatchers(
+                                "/auth/**",
+                                "/swagger-ui/**",  // Permitir acceso a Swagger UI
+                                "/v3/api-docs/**", // Permitir acceso a la documentación generada
+                                "/swagger-ui.html" // Endpoint principal de Swagger UI
+                        ).permitAll() // Permitir acceso sin autenticación a /auth/**
                         .anyRequest().authenticated() // Proteger otros endpoints
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // Filtro JWT

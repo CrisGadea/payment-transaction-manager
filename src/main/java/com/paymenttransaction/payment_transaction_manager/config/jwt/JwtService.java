@@ -1,4 +1,4 @@
-package com.paymenttransaction.payment_transaction_manager.config;
+package com.paymenttransaction.payment_transaction_manager.config.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

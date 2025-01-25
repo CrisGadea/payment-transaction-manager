@@ -3,13 +3,18 @@ package com.paymenttransaction.payment_transaction_manager.application.dtos.tran
 
 import com.paymenttransaction.payment_transaction_manager.domain.enums.Currency;
 import com.paymenttransaction.payment_transaction_manager.domain.enums.TransactionType;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 
+@Schema(description = "Representa los datos necesarios para crear una transacción")
 public class TransactionRequestDTO {
     private String userId;
+    @Schema(description = "Monto de la transacción", example = "100.50")
     private BigDecimal amount;
+    @Schema(description = "Moneda de la transacción", example = "USD")
     private Currency currency;
+    @Schema(description = "Tipo de transacción", example = "P2P")
     private TransactionType transactionType;
 
     public String getUserId() {

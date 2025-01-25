@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class TransactionResponseDTO {
-    private String id;
+    private String transactionId;
     private TransactionStatus status;
     private BigDecimal amount;
     private Currency currency;
@@ -16,11 +16,11 @@ public class TransactionResponseDTO {
     private LocalDateTime createdAt;
 
     public String getTransactionId() {
-        return id;
+        return transactionId;
     }
 
     public void setTransactionId(String transactionId) {
-        this.id = transactionId;
+        this.transactionId = transactionId;
     }
 
     public TransactionStatus getStatus() {

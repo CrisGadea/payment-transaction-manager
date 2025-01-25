@@ -1,4 +1,4 @@
-package com.paymenttransaction.payment_transaction_manager.application.useCases;
+package com.paymenttransaction.payment_transaction_manager.domain.useCases;
 
 import com.paymenttransaction.payment_transaction_manager.application.ports.out.TransactionPort;
 import com.paymenttransaction.payment_transaction_manager.application.ports.in.CreateTransactionUseCase;

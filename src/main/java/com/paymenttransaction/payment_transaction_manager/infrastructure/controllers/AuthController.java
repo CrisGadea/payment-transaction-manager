@@ -1,7 +1,9 @@
 package com.paymenttransaction.payment_transaction_manager.infrastructure.controllers;
 
 import com.paymenttransaction.payment_transaction_manager.application.dtos.auth.AuthRequest;
-import com.paymenttransaction.payment_transaction_manager.config.JwtService;
+import com.paymenttransaction.payment_transaction_manager.config.jwt.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Authentication", description = "Endpoints for user authentication")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -29,22 +32,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "User login", description = "Authenticate user and return a JWT token")
     public ResponseEntity<String> authenticate(@RequestBody AuthRequest authRequest) {
-        // Autenticar las credenciales
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authRequest.getUsername(),
                         authRequest.getPassword()
                 )
         );
-
-        // Recuperar UserDetails
         UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
-
-        // Generar token JWT
         String token = jwtService.generateToken(userDetails);
-
-        // Retornar token
         return ResponseEntity.ok(token);
     }
 }
