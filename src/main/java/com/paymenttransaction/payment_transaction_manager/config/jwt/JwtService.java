@@ -35,7 +35,7 @@ public class JwtService {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Expira en 10 horas
-                .signWith(secretKey) // Usar la clave secreta configurada
+                .signWith(secretKey)
                 .compact();
     }
 
