@@ -14,6 +14,6 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Payment Transaction Manager API")
                         .version("1.0.0")
-                        .description("Documentación de las APIs para el manejo de transacciones financieras"));
+                        .description("Documentation of APIs for the management of financial transactions"));
     }
 }

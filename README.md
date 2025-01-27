@@ -17,8 +17,21 @@ Payment Transaction Manager is a REST API developed in **Java 17** with **Spring
 - **`spring-boot-starter-security`**: To handle authentication and authorization.
 - **`spring-boot-starter-validation`**: For input data validation.
 - **`spring-boot-starter-actuator`**: For system monitoring and metrics.
+- - **`spring-boot-starter-amqp`**: RabbitMQ integration **[NEW]**
+- **`spring-boot-starter-data-redis`**: Redis integration **[NEW]**
 
 **Rationale**: Provides a solid foundation for developing scalable REST services with easy library integration and robust community support.
+AMQP for reliable event-driven compensation patterns and Redis for high-performance idempotency control.
+
+---
+
+### **Event Streaming & Caching**
+- **RabbitMQ**: Message broker for compensation events
+- **Redis**: Distributed caching for idempotency keys
+
+**Justification**:
+- RabbitMQ ensures reliable delivery of compensation events in failure scenarios
+- Redis provides sub-millisecond response times for idempotency checks with TTL support
 
 ---
 
@@ -86,6 +99,70 @@ Payment Transaction Manager is a REST API developed in **Java 17** with **Spring
 - **Independence**: Reduces direct dependencies between business logic and frameworks.
 - **Scalability**: Facilitates the incorporation of new types of transactions or changes in the database.
 
+
+
+---
+
+**Key Enhancements**:
+1. **Event-Driven Compensation**: RabbitMQ listeners handle transaction rollbacks
+2. **Distributed Idempotency**: Redis cluster-ready implementation
+3. **CQRS Pattern**: Separates read/write operations for scaling
+
+---
+
+## Architecture Overview
+
+```mermaid
+flowchart TD
+    subgraph Adapters
+        A[REST Controllers] -->|HTTP Requests| B(Application Layer)
+        C[Redis Client] -->|Idempotency Keys| B
+        D[RabbitMQ Producer] -->|Compensation Events| B
+    end
+
+    subgraph Application Layer
+        B --> E[Transaction Use Cases]
+        E --> F{Business Rules}
+    end
+
+    subgraph Domain
+        F --> G[Transaction Model]
+        G --> H[Validation Service]
+        G --> I[Currency Converter]
+    end
+
+    subgraph Infrastructure
+        J[(MySQL Database)] -->|JPA| K[Transaction Repository]
+        L[External Payment APIs] -->|Feign Client| E
+    end
+
+    style A fill:#4CAF50,stroke:#388E3C
+    style C fill:#FF9800,stroke:#F57C00
+    style D fill:#E91E63,stroke:#C2185B
+    style E fill:#2196F3,stroke:#1976D2
+    style G fill:#9C27B0,stroke:#7B1FA2
+    style J fill:#607D8B,stroke:#455A64
+    style L fill:#009688,stroke:#00796B
+```
+
+**Leyenda:**
+- 🟢 **Adapters**: Puntos de entrada/salida (HTTP, Mensajería, Cache)
+- 🔵 **Application**: Casos de uso y orquestación
+- 🟣 **Domain**: Lógica de negocio central
+- 🟤 **Infrastructure**: Persistencia e integraciones externas
+- 🟠 **Redis**: Gestión de idempotencia
+- 🔴 **RabbitMQ**: Eventos de compensación
+
+---
+
+### **Run Dependencies**
+```bash
+# Redis (Idempotency)
+docker run -d --name redis -p 6379:6379 redis
+
+# RabbitMQ (Events)
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
+
 ---
 
 ### Installation
@@ -94,9 +171,19 @@ Payment Transaction Manager is a REST API developed in **Java 17** with **Spring
     git clone https://github.com/CrisGadea/payment-transaction-manager.git
     cd payment-transaction-manager
 ```
-2. Configure the database in application.yml:
+2. Configure the database, redis and rabbitmq in application.yml:
 ```yaml
 spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 5000
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   datasource:
     url: jdbc:mysql://localhost:3306/transaction_db
     username: your_username
@@ -117,14 +204,17 @@ mvn test
 5. Generate Coverage Report:
 ```bash
 mvn verify
+mvn jacoco:report
 ```
 
 ---
 
 ## Next Steps
-1. Implement global error handling with **`@ControllerAdvice`**.
-2. Improve input data validation with **`@Validated`**.
-3. Set up a continuous integration (CI) environment with GitHub Actions or Jenkins.
+
+1. Set up a continuous integration (CI) environment with GitHub Actions or Jenkins.
+2. Add Redis cluster configuration 
+3. Implement DLQ (Dead Letter Queue) for failed events 
+4. Add Prometheus metrics for Redis/RabbitMQ
 
 ---
 

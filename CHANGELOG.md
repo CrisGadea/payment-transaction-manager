@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2025-01-26
+
+### Changed
+
+- Base Architecture folders.
+- Classes and tests.
+
+### Added
+
+- Redis to caching data for idempotency transactions.
+- RabbitMQ for sender and consumers to retry failed transactions.
+- Configuration classes.
+- User's logic.
+- Interceptors and externals Consumer/Producer classes.
+- New exceptions.
 
 ## [0.0.2] - 2025-01-23
 

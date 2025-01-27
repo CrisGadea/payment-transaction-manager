@@ -1,8 +1,9 @@
 package com.paymenttransaction.payment_transaction_manager.domain.services;
 
-import com.paymenttransaction.payment_transaction_manager.application.ports.in.CreateTransactionUseCase;
-import com.paymenttransaction.payment_transaction_manager.domain.enums.Currency;
-import com.paymenttransaction.payment_transaction_manager.domain.models.Transaction;
+import com.paymenttransaction.payment_transaction_manager.transactions.application.ports.in.CreateTransactionUseCase;
+import com.paymenttransaction.payment_transaction_manager.transactions.domain.enums.Currency;
+import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.Transaction;
+import com.paymenttransaction.payment_transaction_manager.transactions.domain.services.TransactionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

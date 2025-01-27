@@ -1,6 +1,6 @@
 package com.paymenttransaction.payment_transaction_manager.config.jwt;
 
-import com.paymenttransaction.payment_transaction_manager.domain.services.CustomUserDetailsService;
+import com.paymenttransaction.payment_transaction_manager.users.domain.services.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,8 +1,8 @@
 package com.paymenttransaction.payment_transaction_manager.infrastructure.controllers;
 
-import com.paymenttransaction.payment_transaction_manager.application.dtos.transaction.TransactionResponseDTO;
-import com.paymenttransaction.payment_transaction_manager.domain.models.Transaction;
-import com.paymenttransaction.payment_transaction_manager.domain.services.TransactionService;
+import com.paymenttransaction.payment_transaction_manager.transactions.application.dtos.transaction.TransactionResponseDTO;
+import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.Transaction;
+import com.paymenttransaction.payment_transaction_manager.transactions.domain.services.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
