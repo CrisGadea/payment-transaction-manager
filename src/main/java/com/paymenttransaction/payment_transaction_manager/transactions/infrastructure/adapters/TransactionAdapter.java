@@ -40,11 +40,6 @@ public class TransactionAdapter implements TransactionPort {
     }
 
     @Override
-    public Transaction findById(Long id) {
-        return null;
-    }
-
-    @Override
     public Optional<Transaction> getTransactionById(Long id) {
         return repository.findById(id).map(mapper::toModel);
     }

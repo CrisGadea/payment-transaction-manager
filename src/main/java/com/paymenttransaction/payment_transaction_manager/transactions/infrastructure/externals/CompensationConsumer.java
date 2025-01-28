@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class CompensationConsumer {
 
@@ -19,10 +21,12 @@ public class CompensationConsumer {
 
     @RabbitListener(queues = RabbitMQConfig.COMPENSATION_QUEUE)
     public void handleCompensationEvent(CompensationEvent event) {
-        Transaction transaction = transactionRepository.findById(Long.getLong(event.getTransactionId()));
-        if (transaction != null && event.getAction().equals(TransactionStatus.REFUNDED)) {
-            transaction.setStatus(TransactionStatus.REFUNDED);
-            transactionRepository.createTransaction(transaction);
+        Optional<Transaction> transaction = transactionRepository.getTransactionById(Long.getLong(event.getTransactionId()));
+        Transaction transactionFounded;
+        if (transaction.isPresent() && event.getAction().equals(TransactionStatus.REFUNDED)) {
+            transactionFounded = transaction.get();
+            transactionFounded.setStatus(TransactionStatus.REFUNDED);
+            transactionRepository.createTransaction(transactionFounded);
         }
     }
 }

@@ -23,7 +23,7 @@ public class TransactionEntityMapperTest {
         // Given
         Transaction transaction = new Transaction();
         transaction.setId(1L);
-        transaction.setUserId("12345");
+        transaction.setUserId(12345L);
         transaction.setAmount(new BigDecimal("100.50"));
         transaction.setCurrency(Currency.USD);
         transaction.setTransactionType(TransactionType.CARD);
@@ -39,7 +39,6 @@ public class TransactionEntityMapperTest {
         assertEquals("12345", entity.getUserId());
         assertEquals(new BigDecimal("100.50"), entity.getAmount());
         assertEquals(Currency.USD, entity.getCurrency());
-        assertEquals(TransactionType.CARD, entity.getTransactionType());
         assertEquals(TransactionStatus.PENDING, entity.getStatus());
     }
 
@@ -51,7 +50,6 @@ public class TransactionEntityMapperTest {
         entity.setUserId("12345");
         entity.setAmount(new BigDecimal("100.50"));
         entity.setCurrency(Currency.USD);
-        entity.setTransactionType(TransactionType.CARD);
         entity.setStatus(TransactionStatus.COMPLETED);
         entity.setCreatedAt(LocalDateTime.now());
 
@@ -61,10 +59,9 @@ public class TransactionEntityMapperTest {
         // Then
         assertNotNull(transaction);
         assertEquals(1L, transaction.getId());
-        assertEquals("12345", transaction.getUserId());
+        assertEquals(12345L, transaction.getUserId());
         assertEquals(new BigDecimal("100.50"), transaction.getAmount());
         assertEquals(Currency.USD, transaction.getCurrency());
-        assertEquals(TransactionType.CARD, transaction.getTransactionType());
         assertEquals(TransactionStatus.COMPLETED, transaction.getStatus());
     }
 }

@@ -18,6 +18,7 @@ public class UserService implements CreateUserUseCase {
 
     @Override
     public User execute(User user){
+        this.validateData(user);
         return createUserUseCase.execute(user);
     }
 

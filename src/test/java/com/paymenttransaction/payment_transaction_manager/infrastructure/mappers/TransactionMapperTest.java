@@ -32,7 +32,7 @@ class TransactionMapperTest {
 
         // Then
         assertNotNull(transaction);
-        assertEquals("12345", transaction.getUserId());
+        assertEquals(12345L, transaction.getUserId());
         assertEquals(new BigDecimal("100.50"), transaction.getAmount());
         assertEquals(Currency.USD, transaction.getCurrency());
         assertEquals(TransactionType.CARD, transaction.getTransactionType());
@@ -42,7 +42,7 @@ class TransactionMapperTest {
     void shouldMapModelToResponseDTO() {
         // Given
         Transaction transaction = new Transaction();
-        transaction.setUserId("12345");
+        transaction.setUserId(12345L);
         transaction.setAmount(new BigDecimal("100.50"));
         transaction.setCurrency(Currency.USD);
         transaction.setTransactionType(TransactionType.CARD);

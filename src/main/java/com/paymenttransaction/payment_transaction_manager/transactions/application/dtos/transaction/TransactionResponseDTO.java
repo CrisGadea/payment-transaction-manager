@@ -8,18 +8,18 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class TransactionResponseDTO {
-    private String transactionId;
+    private Long transactionId;
     private TransactionStatus status;
     private BigDecimal amount;
     private Currency currency;
     private TransactionType transactionType;
     private LocalDateTime createdAt;
 
-    public String getTransactionId() {
+    public Long getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
     }
 

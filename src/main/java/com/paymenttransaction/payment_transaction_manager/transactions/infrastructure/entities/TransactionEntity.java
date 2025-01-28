@@ -13,14 +13,16 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transactions")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "Transaction")
 public class TransactionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "transaction_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "user_id")
     private String userId;
 
     @Column(nullable = false)
@@ -32,16 +34,12 @@ public class TransactionEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TransactionType transactionType;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "idempotency_key")
     private String idempotencyKey;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
     public Long getId() {
@@ -74,14 +72,6 @@ public class TransactionEntity {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
-    }
-
-    public TransactionType getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
     }
 
     public TransactionStatus getStatus() {

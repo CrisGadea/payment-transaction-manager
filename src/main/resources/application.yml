@@ -10,6 +10,8 @@ spring:
       ddl-auto: none
   flyway:
     enabled: true
+    locations: classpath:db/migration
+    validate-on-migrate: false
   application:
     name: Payment Transaction Manager
   data:

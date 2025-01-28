@@ -1,13 +1,12 @@
 package com.paymenttransaction.payment_transaction_manager.config;
 
 import com.paymenttransaction.payment_transaction_manager.transactions.application.ports.out.TransactionPort;
-import com.paymenttransaction.payment_transaction_manager.transactions.domain.useCases.CreateTransactionUseCaseImpl;
+import com.paymenttransaction.payment_transaction_manager.transactions.domain.useCases.create.CreateTransactionUseCaseImpl;
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.services.TransactionService;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.adapters.TransactionAdapter;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.externals.CompensationProducer;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.mappers.TransactionEntityMapper;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.repositories.TransactionRepository;
-import com.paymenttransaction.payment_transaction_manager.users.application.ports.in.CreateUserUseCase;
 import com.paymenttransaction.payment_transaction_manager.users.application.ports.out.UserPort;
 import com.paymenttransaction.payment_transaction_manager.users.domain.services.UserService;
 import com.paymenttransaction.payment_transaction_manager.users.domain.useCases.CreateUserUseCaseImpl;
