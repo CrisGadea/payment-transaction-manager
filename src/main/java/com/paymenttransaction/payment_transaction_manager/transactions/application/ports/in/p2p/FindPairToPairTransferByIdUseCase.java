@@ -3,5 +3,5 @@ package com.paymenttransaction.payment_transaction_manager.transactions.applicat
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.PairToPair;
 
 public interface FindPairToPairTransferByIdUseCase {
-    PairToPair execute(Long id);
+    PairToPair findPairToPairById(Long id);
 }

@@ -1,7 +1,6 @@
 package com.paymenttransaction.payment_transaction_manager.transactions.domain.models;
 
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.enums.TransactionStatus;
-import com.paymenttransaction.payment_transaction_manager.transactions.domain.enums.TransactionType;
 
 import java.io.Serializable;
 

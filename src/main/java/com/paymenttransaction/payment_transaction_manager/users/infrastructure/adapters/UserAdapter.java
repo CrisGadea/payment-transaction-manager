@@ -6,7 +6,6 @@ import com.paymenttransaction.payment_transaction_manager.users.application.port
 import com.paymenttransaction.payment_transaction_manager.users.domain.models.User;
 import com.paymenttransaction.payment_transaction_manager.users.infrastructure.entities.UserEntity;
 import com.paymenttransaction.payment_transaction_manager.users.infrastructure.mappers.UserEntityMapper;
-import com.paymenttransaction.payment_transaction_manager.users.infrastructure.mappers.UserMapper;
 import com.paymenttransaction.payment_transaction_manager.users.infrastructure.repositories.UserRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;

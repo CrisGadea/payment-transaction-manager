@@ -5,5 +5,5 @@ import com.paymenttransaction.payment_transaction_manager.transactions.domain.mo
 import java.util.List;
 
 public interface FindPairToPairTransfersUseCase {
-    List<PairToPair> execute(Long userId);
+    List<PairToPair> findPairToPairsByUserId(Long userId);
 }

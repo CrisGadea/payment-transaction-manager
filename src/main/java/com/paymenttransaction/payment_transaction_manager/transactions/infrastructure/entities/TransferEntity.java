@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "bank_transfer_transaction")
 public class TransferEntity extends TransactionEntity{
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "bank_code", nullable = false)
-    private BankEntity bank; // Relación ManyToOne con BankEntity
+    @JoinColumn(name = "bank_id", nullable = false)
+    private BankEntity bank;
 
     @Column(nullable = false, name = "recipient_account")
     private String recipientAccount;

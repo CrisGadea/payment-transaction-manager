@@ -4,7 +4,6 @@ import com.paymenttransaction.payment_transaction_manager.transactions.applicati
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.Transaction;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.exceptions.InvalidTransactionException;
 
-import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.exceptions.InvalidTransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -26,20 +26,16 @@ public class CreateTransactionUseCaseImpl implements CreateTransactionUseCase {
     @Override
     public Transaction execute(Transaction transaction) {
         try {
-            // Generar el ID ANTES de persistir
             transaction.setIdempotencyKey(UUID.randomUUID().toString());
 
             transaction.setStatus(TransactionStatus.PENDING);
             transaction.setCreatedAt(LocalDateTime.now());
 
-            Transaction savedTransaction = transactionPort.createTransaction(transaction);
+            return transactionPort.createTransaction(transaction);
 
-            // Aquí iría lógica adicional (ej: notificar otros servicios)
 
-            return savedTransaction;
 
         } catch (Exception ex) {
-            // Enviar evento de compensación con el ID generado
             compensationProducer.sendCompensationEvent(
                     new CompensationEvent(transaction.getIdempotencyKey(), TransactionStatus.REFUNDED)
             );

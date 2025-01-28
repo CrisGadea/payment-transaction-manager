@@ -6,10 +6,6 @@ import com.paymenttransaction.payment_transaction_manager.transactions.domain.mo
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.entities.TransactionEntity;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.mappers.TransactionEntityMapper;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.repositories.TransactionRepository;
-import com.paymenttransaction.payment_transaction_manager.transactions.application.ports.out.TransactionPort;
-import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.Transaction;
-import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.mappers.TransactionEntityMapper;
-import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.repositories.TransactionRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

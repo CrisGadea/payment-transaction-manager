@@ -5,5 +5,5 @@ import com.paymenttransaction.payment_transaction_manager.transactions.domain.mo
 import java.util.List;
 
 public interface FindCardsUseCase {
-    List<Card> execute(Long userId);
+    List<Card> findCardsUseCase(Long userId);
 }

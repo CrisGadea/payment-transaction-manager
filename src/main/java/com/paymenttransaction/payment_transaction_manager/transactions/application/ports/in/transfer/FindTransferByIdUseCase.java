@@ -3,5 +3,5 @@ package com.paymenttransaction.payment_transaction_manager.transactions.applicat
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.Transfer;
 
 public interface FindTransferByIdUseCase {
-    Transfer execute(Long id);
+    Transfer findTransferByIdUseCase(Long id);
 }

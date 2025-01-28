@@ -22,7 +22,6 @@ public class IdempotencyInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // Envolvemos la respuesta para poder acceder a su contenido después
         if (!(response instanceof ContentCachingResponseWrapper)) {
             response = new ContentCachingResponseWrapper(response);
         }
@@ -51,18 +50,16 @@ public class IdempotencyInterceptor implements HandlerInterceptor {
                 ContentCachingResponseWrapper wrappedResponse = (ContentCachingResponseWrapper) response;
 
                 try {
-                    // Convertimos el contenido a String
                     byte[] responseBytes = wrappedResponse.getContentAsByteArray();
                     String responseBody = new String(responseBytes, StandardCharsets.UTF_8);
 
-                    // Guardamos en Redis con expiración de 24 horas
+                    // Saved on Redis with an expiration time of 24 hours.
                     redisTemplate.opsForValue().set(
                             idempotencyKey,
                             responseBody,
                             Duration.ofHours(24)
                     );
 
-                    // Copiamos el contenido al response original
                     wrappedResponse.copyBodyToResponse();
                 } catch (IOException e) {
                     throw new RuntimeException("Error procesando respuesta", e);

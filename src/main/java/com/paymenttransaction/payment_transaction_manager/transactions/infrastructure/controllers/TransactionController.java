@@ -5,8 +5,6 @@ import com.paymenttransaction.payment_transaction_manager.transactions.applicati
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.Transaction;
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.services.TransactionService;
 import com.paymenttransaction.payment_transaction_manager.transactions.infrastructure.mappers.TransactionMapper;
-import com.paymenttransaction.payment_transaction_manager.transactions.application.dtos.transaction.TransactionRequestDTO;
-import com.paymenttransaction.payment_transaction_manager.transactions.application.dtos.transaction.TransactionResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
