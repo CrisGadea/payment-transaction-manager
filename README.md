@@ -99,7 +99,19 @@ AMQP for reliable event-driven compensation patterns and Redis for high-performa
 - **Independence**: Reduces direct dependencies between business logic and frameworks.
 - **Scalability**: Facilitates the incorporation of new types of transactions or changes in the database.
 
-
+```mermaid
+graph TD
+    A[Cliente] --> B[Controladores]
+    B --> C[Casos de Uso]
+    C --> D[Servicios]
+    D --> E[Puertos de Salida]
+    E --> F[Repositorios]
+    F --> G[Entidades JPA]
+    G --> H[Base de Datos]
+    E --> I[Servicios Externos]
+    I --> J[Message Broker]
+    I --> K[Redis]
+```
 
 ---
 

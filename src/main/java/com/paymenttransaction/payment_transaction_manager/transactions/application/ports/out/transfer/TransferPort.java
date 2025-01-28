@@ -1,5 +1,6 @@
 package com.paymenttransaction.payment_transaction_manager.transactions.application.ports.out.transfer;
 
+import com.paymenttransaction.payment_transaction_manager.transactions.domain.enums.TransactionStatus;
 import com.paymenttransaction.payment_transaction_manager.transactions.domain.models.Transfer;
 
 import java.util.List;
@@ -9,4 +10,5 @@ public interface TransferPort {
     Transfer createTransfer(Transfer card);
     Optional<Transfer> getTransferById(Long id);
     Optional<List<Transfer>> getTransfers(Long userId);
+    TransactionStatus getTransactionStatusById(Long id);
 }
